@@ -1,5 +1,4 @@
 User-agent: *
-Disallow: /private/
 Allow: /
 
-Sitemap: http://www.vineetdurge.in/sitemap.xml
+Sitemap: https://www.vineetdurge.in/sitemap.xml
