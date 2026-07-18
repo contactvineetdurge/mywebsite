@@ -93,11 +93,13 @@
     ).forEach(function (el) {
       el.classList.add("motion-reveal");
     });
-    qa("#form .wrap-contact100").forEach(function (el) {
-      el.classList.add("motion-reveal");
-    });
-    // Footer (.tc-headline-1) is handled separately — never motion-reveal
-    // (last-on-page elements often never hit "top 92%" with smooth scroll)
+    qa("#form .wrap-contact100, #form .wrap-input100, #form .contact100-form-btn").forEach(
+      function (el) {
+        el.classList.add("motion-reveal");
+      }
+    );
+    var foot = q(".tc-headline-1");
+    if (foot) foot.classList.add("motion-reveal");
 
     qa("#abouts .display-4, #form .contact100-form-title, #abouts h2.fw-lighter, #abouts h2.fw-normal").forEach(
       wrapLines
@@ -232,29 +234,20 @@
     requestAnimationFrame(sample);
   }
 
-  /* ---------- Lenis + ScrollTrigger bridge ---------- */
+  /* ---------- Lenis boost + ScrollTrigger ---------- */
   function bridgeLenis() {
     if (!window.ScrollTrigger) return;
 
-    function hook() {
-      if (window.__lenis) {
-        window.__lenis.on("scroll", function () {
-          ScrollTrigger.update();
-        });
-        gsap.ticker.lagSmoothing(0);
-        ScrollTrigger.refresh();
-        return true;
+    // Try to reconfigure Lenis if exposed later
+    function punchLenis() {
+      if (window.__lenis && typeof window.__lenis.options === "object") {
+        try {
+          // Lenis v1 options are often set at construct time; still useful if recreated
+        } catch (e) {}
       }
-      return false;
     }
-
-    if (!hook()) {
-      var n = 0;
-      var id = setInterval(function () {
-        n++;
-        if (hook() || n > 40) clearInterval(id);
-      }, 50);
-    }
+    punchLenis();
+    setTimeout(punchLenis, 500);
 
     window.addEventListener(
       "scroll",
@@ -263,6 +256,10 @@
       },
       { passive: true }
     );
+
+    if (window.ScrollTrigger) {
+      gsap.ticker.lagSmoothing(0);
+    }
   }
 
   /* ---------- Aggressive scroll reveals + scrub ---------- */
@@ -429,17 +426,19 @@
       });
     }
 
-    // Footer / Established 2024 — always visible (no late scroll-gate)
-    // Last page elements often never hit high "start" lines with Lenis
+    // Footer rise
     var foot = q(".tc-headline-1");
     if (foot) {
-      gsap.killTweensOf(foot);
-      gsap.set(foot, {
-        opacity: 1,
-        y: 0,
-        x: 0,
-        visibility: "visible",
-        clearProps: "transform,opacity",
+      gsap.from(foot, {
+        scrollTrigger: {
+          trigger: foot,
+          start: "top 95%",
+          toggleActions: "play none none none",
+        },
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "expo.out",
       });
     }
   }
@@ -693,12 +692,86 @@
     });
   }
 
-  /* ---------- Custom cursor disabled (kept system cursor; no smooth-scroll conflict) ---------- */
+  /* ---------- Animated circular cursor (desktop) ---------- */
   function initCursor() {
+    if (reduced || window.innerWidth < 900) return;
+
+    // Remove any previous cursor markup
     var old = q("#motion-cursor");
-    if (old && old.parentNode) old.parentNode.removeChild(old);
-    document.documentElement.classList.add("cursor-native");
-    document.body.classList.remove("cursor-on", "cursor-hover", "cursor-text", "cursor-down");
+    if (old) old.parentNode.removeChild(old);
+
+    var cur = document.createElement("div");
+    cur.id = "motion-cursor";
+    cur.setAttribute("aria-hidden", "true");
+    cur.innerHTML =
+      '<div class="mc-core">' +
+      '  <span class="mc-orb"></span>' +
+      '  <span class="mc-ring mc-ring-a"></span>' +
+      '  <span class="mc-ring mc-ring-b"></span>' +
+      '  <span class="mc-ring mc-ring-c"></span>' +
+      '  <span class="mc-pulse"></span>' +
+      "</div>";
+    document.body.appendChild(cur);
+
+    var core = cur.querySelector(".mc-core");
+    var pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    var visible = false;
+
+    gsap.set(core, { xPercent: -50, yPercent: -50, x: pos.x, y: pos.y });
+
+    document.addEventListener(
+      "pointermove",
+      function (e) {
+        pos.x = e.clientX;
+        pos.y = e.clientY;
+        if (!visible) {
+          visible = true;
+          document.body.classList.add("cursor-on");
+          gsap.to(core, { opacity: 1, scale: 1, duration: 0.35, ease: "power3.out" });
+        }
+        gsap.to(core, {
+          x: pos.x,
+          y: pos.y,
+          duration: 0.35,
+          ease: "power3.out",
+          overwrite: "auto",
+        });
+      },
+      { passive: true }
+    );
+
+    document.addEventListener("pointerleave", function () {
+      visible = false;
+      document.body.classList.remove("cursor-on", "cursor-hover", "cursor-text");
+      gsap.to(core, { opacity: 0, scale: 0.6, duration: 0.3, ease: "power2.in" });
+    });
+
+    document.addEventListener("pointerdown", function () {
+      document.body.classList.add("cursor-down");
+    });
+    document.addEventListener("pointerup", function () {
+      document.body.classList.remove("cursor-down");
+    });
+
+    qa("a, button, .magnetic, .channel-card, #callMeBtn, .link-fancy, .nav-link").forEach(
+      function (el) {
+        el.addEventListener("mouseenter", function () {
+          document.body.classList.add("cursor-hover");
+        });
+        el.addEventListener("mouseleave", function () {
+          document.body.classList.remove("cursor-hover");
+        });
+      }
+    );
+
+    qa("input, textarea, [contenteditable]").forEach(function (el) {
+      el.addEventListener("mouseenter", function () {
+        document.body.classList.add("cursor-text");
+      });
+      el.addEventListener("mouseleave", function () {
+        document.body.classList.remove("cursor-text");
+      });
+    });
   }
 
   ready(function () {

@@ -45,19 +45,8 @@
 }
 
 /* ---------- Base ---------- */
-/* Native smooth only as fallback — Lenis handles scroll when active */
 html {
-  scroll-behavior: auto;
-}
-
-html.native-smooth {
   scroll-behavior: smooth;
-}
-
-html.has-smooth-scroll,
-html.lenis,
-html.lenis-smooth {
-  scroll-behavior: auto !important;
 }
 
 body.text-white.bg-black,
