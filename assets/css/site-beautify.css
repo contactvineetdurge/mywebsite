@@ -1,0 +1,795 @@
+/* =========================================================
+   Vineet Durge — unified brand theme & visual polish
+   Palette: charcoal black + brand crimson + soft neutrals
+   ========================================================= */
+
+:root {
+  --brand-red: #c8102e;
+  --brand-red-deep: #8b0a1e;
+  --brand-red-soft: rgba(200, 16, 46, 0.18);
+  --brand-red-glow: rgba(200, 16, 46, 0.45);
+  --brand-gold: #e8c547;
+  --bg-deep: #070707;
+  --bg-body: #0b0b0b;
+  --bg-elevated: #141010;
+  --bg-card: #161212;
+  --bg-card-hover: #1e1818;
+  --bg-nav: rgba(12, 10, 10, 0.72);
+  --text-primary: #f4f1f1;
+  --text-secondary: #a89f9f;
+  --text-muted: #7a7272;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+  --shadow-soft: 0 12px 40px rgba(0, 0, 0, 0.45);
+  --shadow-card: 0 16px 48px rgba(0, 0, 0, 0.55);
+  --shadow-red: 0 8px 28px rgba(200, 16, 46, 0.28);
+  --transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Bootstrap overrides — match brand */
+  --bs-primary: #c8102e;
+  --bs-primary-rgb: 200, 16, 46;
+  --bs-secondary: #a89f9f;
+  --bs-secondary-rgb: 168, 159, 159;
+  --bs-dark: #141010;
+  --bs-dark-rgb: 20, 16, 16;
+  --bs-body-bg: #0b0b0b;
+  --bs-body-color: #f4f1f1;
+  --bs-link-color: #c8102e;
+  --bs-link-hover-color: #e83a52;
+  --bs-border-color: rgba(255, 255, 255, 0.1);
+  --bs-focus-ring-color: rgba(200, 16, 46, 0.35);
+}
+
+/* ---------- Base ---------- */
+/* Native smooth only as fallback — Lenis handles scroll when active */
+html {
+  scroll-behavior: auto;
+}
+
+html.native-smooth {
+  scroll-behavior: smooth;
+}
+
+html.has-smooth-scroll,
+html.lenis,
+html.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+body.text-white.bg-black,
+body {
+  background-color: var(--bg-body) !important;
+  background-image: radial-gradient(ellipse 120% 80% at 50% -20%, #1a0a0e 0%, var(--bg-body) 55%) !important;
+  color: var(--text-primary) !important;
+  font-family: Poppins, Nunito, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Starfield override — warmer black, no blue navy clash */
+#starfield-container ~ * html,
+html:has(#sf-background) {
+  background: var(--bg-body);
+}
+
+#sf-background {
+  background: radial-gradient(ellipse at bottom, #1a1014 0%, #070707 70%) !important;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Typography ---------- */
+h1, h2, h3, h4, h5, h6,
+.display-4,
+.display-huge {
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.display-4 {
+  font-weight: 600;
+  text-shadow: none !important;
+  position: relative;
+}
+
+#abouts .display-4 {
+  background: linear-gradient(135deg, #fff 0%, #f0d0d4 45%, var(--brand-red) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: none !important;
+}
+
+.text-secondary,
+.fw-lighter.text-secondary,
+p.text-secondary {
+  color: var(--text-secondary) !important;
+}
+
+.lead {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+/* ---------- Navbar ---------- */
+#navScroll.navbar {
+  border-radius: 0 !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: transparent !important;
+  padding-top: 1rem !important;
+  z-index: 1030;
+  transition: background var(--transition), backdrop-filter var(--transition);
+}
+
+#navScroll .navbar-nav {
+  background: var(--bg-nav) !important;
+  backdrop-filter: blur(16px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(140%) !important;
+  border: 1px solid var(--border-strong) !important;
+  border-radius: var(--radius-pill) !important;
+  box-shadow: var(--shadow-soft), 0 0 0 1px rgba(200, 16, 46, 0.08) !important;
+  text-shadow: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+  padding: 0.35rem 0.5rem !important;
+  gap: 0.15rem;
+  align-items: center;
+  list-style: none;
+}
+
+#navScroll .nav-link {
+  color: var(--text-primary) !important;
+  margin: 0 !important;
+  padding: 0.55rem 1.15rem !important;
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.02em;
+  text-transform: capitalize;
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+}
+
+#navScroll .nav-link:hover,
+#navScroll .nav-link:focus {
+  background: var(--brand-red-soft);
+  color: #fff !important;
+  box-shadow: inset 0 0 0 1px rgba(200, 16, 46, 0.35);
+}
+
+#navScroll .nav-link:active {
+  background: var(--brand-red);
+  color: #fff !important;
+}
+
+/* ---------- Hero ---------- */
+#vineet-big-name {
+  position: relative;
+  isolation: isolate;
+}
+
+#vineet-big-name::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(180deg, rgba(7, 7, 7, 0.35) 0%, rgba(7, 7, 7, 0.15) 40%, rgba(7, 7, 7, 0.85) 100%),
+    radial-gradient(ellipse 70% 50% at 50% 100%, var(--brand-red-soft), transparent 70%);
+  pointer-events: none;
+}
+
+#vineet-big-name > * {
+  position: relative;
+  z-index: 1;
+}
+
+#vineet-big-name .hero-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  width: fit-content;
+  margin-left: auto !important;
+  margin-right: clamp(1rem, 5vw, 4rem) !important;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: clamp(1.1rem, 2.5vw, 1.75rem) !important;
+  font-family: Poppins, sans-serif !important;
+  color: var(--text-primary) !important;
+  text-align: right;
+  padding: 0.5rem 1.25rem 0.5rem 1.5rem;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-soft);
+  animation: none !important;
+}
+
+#vineet-big-name .hero-badge i,
+#vineet-big-name .hero-badge .typcn {
+  background: linear-gradient(135deg, var(--brand-red), var(--brand-red-deep)) !important;
+  color: #fff !important;
+  border-radius: 50% !important;
+  font-size: 1.35em !important;
+  width: 1.6em;
+  height: 1.6em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-red);
+}
+
+#vineet-big-name .big-name h1 {
+  text-shadow: 0 4px 40px rgba(0, 0, 0, 0.6);
+  background: linear-gradient(180deg, #fff 30%, #d4b8bc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ---------- Cards / Work section ---------- */
+#abouts {
+  border-radius: var(--radius-lg) !important;
+  background: transparent;
+}
+
+#abouts .card {
+  border: none !important;
+  background: transparent !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+#abouts .card > .bg-dark,
+#abouts .card > .rounded-5,
+#abouts .channel-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-card) !important;
+  overflow: hidden;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+#abouts .card > .bg-dark:hover,
+#abouts .card > .rounded-5:hover,
+#abouts .channel-card:hover {
+  /* transform handled by GSAP site-motion when present */
+  border-color: rgba(200, 16, 46, 0.35) !important;
+  box-shadow: var(--shadow-card), 0 0 0 1px rgba(200, 16, 46, 0.12), var(--shadow-red) !important;
+  background: var(--bg-card-hover) !important;
+}
+
+html:not(.js-motion) #abouts .channel-card:hover {
+  transform: translateY(-6px);
+}
+
+#abouts .img-thumbnail {
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 16 / 10;
+  filter: saturate(1.05) contrast(1.02);
+  transition: filter var(--transition);
+}
+
+html:not(.js-motion) #abouts .card:hover .img-thumbnail {
+  transform: scale(1.03);
+  filter: saturate(1.1) contrast(1.05);
+}
+
+#abouts .card .p-5 {
+  padding: 1.75rem !important;
+}
+
+#abouts h2 span,
+#abouts h2 .fw-lighter span {
+  color: var(--text-primary) !important;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+#abouts h2 svg,
+#abouts .bi-youtube,
+#abouts .bi-instagram {
+  color: var(--brand-red) !important;
+  font-size: 1.75rem !important;
+  vertical-align: middle;
+  margin-left: 0.35rem;
+  filter: drop-shadow(0 2px 8px var(--brand-red-glow));
+}
+
+#abouts .text-secondary {
+  color: var(--text-secondary) !important;
+  line-height: 1.65;
+  font-size: 0.95rem;
+}
+
+/* ---------- Fancy links → brand red ---------- */
+.link-fancy,
+.link-fancy-light {
+  color: #fff !important;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  padding-bottom: 4px;
+}
+
+.link-fancy:hover,
+.link-fancy-light:hover {
+  color: var(--brand-red) !important;
+}
+
+.link-fancy:before,
+.link-fancy-light:before {
+  height: 2px !important;
+  background-image: linear-gradient(
+    90deg,
+    var(--brand-red) 0,
+    var(--brand-red) 25%,
+    transparent 0,
+    transparent 50%,
+    var(--brand-red) 0,
+    var(--brand-red) 75%,
+    transparent 0,
+    transparent
+  ) !important;
+}
+
+/* ---------- Gallery ---------- */
+#gallery-1 {
+  position: relative;
+}
+
+#gallery-1 .img-fluid.rounded {
+  border-radius: var(--radius-sm) !important;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  filter: saturate(1.02);
+}
+
+#gallery-1 .img-fluid.rounded:hover {
+  border-color: rgba(200, 16, 46, 0.3);
+  box-shadow: var(--shadow-red);
+}
+
+html:not(.js-motion) #gallery-1 .img-fluid.rounded:hover {
+  transform: scale(1.02);
+}
+
+/* ---------- About / stats section ---------- */
+section.position-relative .container.bg-black,
+section.position-relative .bg-dark {
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-card);
+}
+
+section.position-relative .lead {
+  border-color: var(--border-strong) !important;
+  color: var(--text-secondary);
+}
+
+section.position-relative .display-huge,
+#animated-counter,
+#counter-2m,
+#counter-98 {
+  color: var(--text-primary) !important;
+  background: linear-gradient(135deg, #fff 0%, #f5c6cb 50%, var(--brand-red) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+section.position-relative .border-secondary {
+  border-color: var(--border-subtle) !important;
+}
+
+section.position-relative .img-fluid.rounded-5 {
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+/* ---------- Contact form ---------- */
+#form.container-contact100 {
+  min-height: auto !important;
+  padding: 4rem 1.25rem !important;
+  margin-top: 2rem !important;
+  border-radius: var(--radius-lg) !important;
+  background-color: transparent !important;
+  background-blend-mode: soft-light;
+  position: relative;
+}
+
+#form.container-contact100::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(ellipse 60% 50% at 50% 50%, var(--brand-red-soft), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#form .wrap-contact100 {
+  position: relative;
+  z-index: 1;
+  padding: 2.5rem 1.5rem !important;
+  background: rgba(16, 12, 12, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-card);
+  max-width: 560px;
+  width: 100%;
+}
+
+.contact100-form-title {
+  color: var(--text-primary) !important;
+  text-shadow: none !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+  font-size: 1.65rem !important;
+  letter-spacing: -0.02em;
+  text-transform: none !important;
+  padding-bottom: 1.75rem !important;
+  position: relative;
+}
+
+.contact100-form-title::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  margin: 0.85rem auto 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--brand-red), transparent);
+}
+
+.wrap-input100 {
+  background: transparent !important;
+  border-radius: var(--radius-md) !important;
+  margin-bottom: 0.9rem !important;
+  border: 1px solid var(--border-subtle);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  overflow: hidden;
+}
+
+.wrap-input100:focus-within {
+  border-color: rgba(200, 16, 46, 0.55);
+  box-shadow: 0 0 0 3px var(--brand-red-soft);
+}
+
+.input100,
+input.input100,
+textarea.input100 {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--text-primary) !important;
+  border-radius: var(--radius-md) !important;
+  font-size: 1rem !important;
+  border: none !important;
+}
+
+.input100::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 1;
+}
+
+.focus-input100 {
+  background: transparent !important;
+  border-radius: var(--radius-md) !important;
+}
+
+.input100:focus + .focus-input100 {
+  width: 100% !important;
+}
+
+.contact100-form-btn {
+  min-width: 180px !important;
+  height: 54px !important;
+  border-radius: var(--radius-pill) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em;
+  animation: none !important;
+  box-shadow: var(--shadow-red);
+}
+
+.contact100-form-btn::before {
+  background: linear-gradient(135deg, var(--brand-red), var(--brand-red-deep)) !important;
+  border-radius: var(--radius-pill) !important;
+}
+
+.contact100-form-btn:hover::before {
+  background: linear-gradient(135deg, #e01a38, var(--brand-red)) !important;
+  width: calc(100% + 8px) !important;
+}
+
+/* Buttons global */
+.btn-primary,
+.btn.btn-primary {
+  color: #fff !important;
+  background: linear-gradient(135deg, var(--brand-red), var(--brand-red-deep)) !important;
+  border-color: transparent !important;
+  border-radius: var(--radius-pill) !important;
+  box-shadow: var(--shadow-red);
+  transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+}
+
+.btn-primary:hover,
+.btn.btn-primary:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 32px rgba(200, 16, 46, 0.4);
+  color: #fff !important;
+  background: linear-gradient(135deg, #e01a38, var(--brand-red)) !important;
+  border-color: transparent !important;
+}
+
+.btn-check:active + .btn-primary:focus,
+.btn-primary:focus {
+  box-shadow: 0 0 0 0.25rem var(--brand-red-soft) !important;
+}
+
+/* ---------- Hire Me / Popup ---------- */
+#callMeBtn {
+  background: linear-gradient(135deg, var(--brand-red), var(--brand-red-deep)) !important;
+  color: #fff !important;
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  right: 0 !important;
+  bottom: 6rem !important;
+  padding: 0.85rem 1.1rem !important;
+  font-family: Poppins, sans-serif !important;
+  font-weight: 600;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.04em;
+  box-shadow: var(--shadow-red);
+  transform: none !important;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+#callMeBtn:hover {
+  transform: translateX(-4px) !important;
+  box-shadow: 0 12px 32px rgba(200, 16, 46, 0.5);
+}
+
+#callMeBtn span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.95rem !important;
+  transform: rotate(180deg);
+}
+
+.popup {
+  background: rgba(0, 0, 0, 0.72) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+
+.popup-content {
+  background: linear-gradient(160deg, #1a1414 0%, #120e0e 100%) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid rgba(200, 16, 46, 0.35) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-card), 0 0 60px rgba(200, 16, 46, 0.2) !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  padding: 2.5rem 2rem !important;
+  max-width: 420px;
+  width: calc(100% - 2rem);
+}
+
+.popup-content h2 {
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.popup-content h2::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--brand-red);
+}
+
+.popup-content p {
+  color: var(--text-secondary);
+  text-decoration: none;
+  margin-bottom: 0.65rem;
+  font-size: 0.95rem;
+}
+
+.popup-content p strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ---------- Preloader ---------- */
+#preloaderpage {
+  background: linear-gradient(160deg, #0d080a 0%, #1a0a0e 50%, #0a0a0a 100%) !important;
+  border-bottom: 4px solid var(--brand-red) !important;
+  color: #fff !important;
+  font-family: Poppins, sans-serif !important;
+  letter-spacing: 0.04em;
+}
+
+#greeting {
+  background: linear-gradient(135deg, #fff, #f0b8c0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+
+/* ---------- Progress bar ---------- */
+#vvpb-bar {
+  background: linear-gradient(90deg, var(--brand-red-deep), var(--brand-red), #f06070) !important;
+  box-shadow: 0 0 12px var(--brand-red-glow) !important;
+}
+
+/* ---------- Copyright / footer headline ---------- */
+.tc-headline-1 {
+  color: var(--text-muted) !important;
+  margin: 3rem 0 2.5rem !important;
+  position: relative;
+  z-index: 1;
+}
+
+.tc-headline-1 h1 {
+  font-size: clamp(1.75rem, 4vw, 2.75rem) !important;
+  font-weight: 700 !important;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+}
+
+.tc-headline-1 h5 {
+  background: linear-gradient(135deg, var(--brand-red), var(--brand-red-deep)) !important;
+  color: #fff !important;
+  border-radius: var(--radius-pill);
+  padding: 0.35rem 1.25rem !important;
+  font-size: 0.7rem !important;
+  letter-spacing: 0.12em;
+}
+
+.tc-headline-1 h5:before,
+.tc-headline-1 h5:after {
+  display: none !important;
+}
+
+.tc-headline-1 h6 {
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+}
+
+.tc-headline-1 h6:before,
+.tc-headline-1 h6:after {
+  border-top-color: var(--brand-red) !important;
+  border-bottom-color: var(--brand-red) !important;
+  opacity: 0.5;
+  width: 24px;
+}
+
+/* ---------- Footer (if used) ---------- */
+.footer {
+  background: var(--bg-elevated) !important;
+  border-color: var(--border-subtle) !important;
+  color: var(--text-primary) !important;
+  position: relative !important;
+  height: auto !important;
+  padding: 2rem 1rem !important;
+}
+
+.footer-text-heading {
+  color: var(--brand-gold) !important;
+}
+
+.footer-text-paragraph {
+  color: var(--text-secondary) !important;
+}
+
+.footer-icons {
+  background: var(--brand-red) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+  border-radius: 50% !important;
+}
+
+/* ---------- Empty red strip cleanup ---------- */
+.bg-dark[style*="143,0,0"] {
+  display: none !important;
+}
+
+/* ---------- Selection & focus ---------- */
+::selection {
+  background: var(--brand-red);
+  color: #fff;
+}
+
+a:focus-visible,
+button:focus-visible,
+.nav-link:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--brand-red);
+  outline-offset: 3px;
+}
+
+/* ---------- Responsive polish ---------- */
+@media (max-width: 768px) {
+  #navScroll .navbar-nav {
+    padding: 0.25rem 0.35rem !important;
+    flex-wrap: nowrap;
+  }
+
+  #navScroll .nav-link {
+    padding: 0.45rem 0.75rem !important;
+    font-size: 0.85rem !important;
+  }
+
+  #vineet-big-name .hero-badge {
+    margin-right: 1rem !important;
+    font-size: 1rem !important;
+    padding-right: 1rem;
+  }
+
+  #abouts .card .p-5 {
+    padding: 1.25rem !important;
+  }
+
+  #callMeBtn {
+    bottom: 4rem !important;
+    padding: 0.65rem 0.75rem !important;
+  }
+
+  #form .wrap-contact100 {
+    padding: 1.75rem 1rem !important;
+  }
+}
+
+@media (max-width: 576px) {
+  #vineet-big-name .big-name h1 {
+    font-size: max(4.5rem, 18vw) !important;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

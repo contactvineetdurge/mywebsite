@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  background: #222;
-  font-family: Arial, sans-serif;
+  background: #0b0b0b;
+  font-family: Poppins, Arial, sans-serif;
 }
 
 /* Call Me Button */
@@ -9,12 +9,11 @@ body {
 #callMeBtn {
   position: fixed;
   bottom: 50px;
-  right: -40px;
-  background: transparent;
+  right: 0;
+  background: #c8102e;
   color: white;
   font-size: 20px;
-  font-family: courier;
-  transform: rotate(-90deg);
+  font-family: Poppins, sans-serif;
   cursor: pointer;
   z-index: 200;
   padding: 10px 15px;
@@ -31,9 +30,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 300;
 }
 
@@ -44,11 +43,12 @@ body {
 /* Popup Content */
 
 .popup-content {
-  background: white;
-  padding: 20px 30px;
-  border-radius: 15px;
+  background: #161212;
+  color: #f4f1f1;
+  padding: 28px 32px;
+  border-radius: 24px;
   max-width: 400px;
   text-align: center;
-  box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.55), 0 0 40px rgba(200, 16, 46, 0.15);
+  border: 1px solid rgba(200, 16, 46, 0.3);
 }
-

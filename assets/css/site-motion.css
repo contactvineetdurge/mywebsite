@@ -1,0 +1,150 @@
+/* =========================================================
+   Site motion — aggressive helpers + custom cursor
+   ========================================================= */
+
+/* Keep intro targets hidden until GSAP has set their start state */
+html.js-motion body:not(.motion-ready) main .once-in,
+html.js-motion body:not(.motion-ready) #navScroll,
+html.js-motion body:not(.motion-ready) #vineet-big-name .big-name,
+html.js-motion body:not(.motion-ready) #vineet-big-name .hero-badge,
+html.js-motion body:not(.motion-ready) #callMeBtn {
+  visibility: hidden !important;
+}
+
+/* Extra guard: never show the name at rest before intro starts */
+html.js-motion body:not(.motion-ready) #vineet-big-name .big-name,
+html.js-motion body:not(.motion-ready) #vineet-big-name .big-name h1 {
+  opacity: 0 !important;
+}
+
+/* Perspective for rotateX reveals */
+main,
+#abouts,
+#gallery-1,
+section.position-relative {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+#preloaderpage {
+  will-change: transform;
+}
+
+#preloaderpage .loader-curve {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+#preloaderpage .loader-curve-inner {
+  width: 160%;
+  height: 900%;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(160deg, #0d080a 0%, #1a0a0e 50%, #0a0a0a 100%);
+}
+
+.motion-clip {
+  overflow: hidden;
+  display: block;
+}
+
+.motion-clip > .motion-line-inner {
+  display: block;
+  will-change: transform;
+}
+
+.motion-img-wrap {
+  overflow: hidden;
+  display: block;
+  border-radius: inherit;
+}
+
+.motion-img-wrap img,
+.channel-card .img-thumbnail,
+#gallery-1 .img-fluid {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.magnetic {
+  display: inline-flex;
+  will-change: transform;
+  cursor: pointer;
+}
+
+#navScroll .nav-link.magnetic {
+  display: inline-flex;
+}
+
+#callMeBtn.magnetic {
+  display: flex;
+  cursor: pointer;
+}
+
+#abouts .channel-card.magnetic {
+  display: block;
+  cursor: pointer;
+}
+
+.once-in,
+.motion-reveal,
+.channel-card,
+.display-huge {
+  will-change: transform, opacity;
+}
+
+/* Custom cursor removed — always use native cursor */
+html.js-motion,
+html.js-motion body,
+html.cursor-native,
+html.cursor-native body,
+html.cursor-native a,
+html.cursor-native button,
+html.cursor-native .magnetic {
+  cursor: auto;
+}
+
+html.cursor-native a,
+html.cursor-native button,
+html.cursor-native .nav-link,
+html.cursor-native .link-fancy,
+html.cursor-native #callMeBtn,
+html.cursor-native .magnetic {
+  cursor: pointer;
+}
+
+#motion-cursor {
+  display: none !important;
+}
+
+/* Footer always paintable (avoid stuck opacity 0 from late scroll triggers) */
+.tc-headline-1 {
+  visibility: visible !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js-motion body:not(.motion-ready) main .once-in,
+  html.js-motion body:not(.motion-ready) #navScroll {
+    visibility: visible !important;
+  }
+
+  .once-in,
+  .motion-reveal,
+  .magnetic,
+  .motion-img-wrap img {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  html.js-motion body {
+    cursor: auto !important;
+  }
+}
