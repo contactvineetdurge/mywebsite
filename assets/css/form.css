@@ -25,7 +25,7 @@ textarea:focus, input:focus {
   align-items: center;
   padding: 15px;
   position: relative;
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .wrap-contact100 {
@@ -41,7 +41,7 @@ textarea:focus, input:focus {
 .contact100-form-title {
   display: block;
   font-size: 30px;
-  color: #403866;
+  color: #f4f1f1;
   line-height: 1.2;
   text-transform: uppercase;
   text-align: center;
@@ -50,8 +50,8 @@ textarea:focus, input:focus {
 
 .wrap-input100 {
   width: 100%;
-  background-color: #fff;
-  border-radius: 31px;
+  background-color: transparent;
+  border-radius: 20px;
   margin-bottom: 16px;
   position: relative;
   z-index: 1;
@@ -61,10 +61,10 @@ textarea:focus, input:focus {
   position: relative;
   display: block;
   width: 100%;
-  background: #fff;
-  border-radius: 31px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 20px;
   font-size: 18px;
-  color: #8f8fa1;
+  color: #f4f1f1;
   line-height: 1.2;
 }
 
@@ -91,8 +91,8 @@ textarea.input100 {
   -ms-transform: translateX(-50%);
   -o-transform: translateX(-50%);
   transform: translateX(-50%);
-  border-radius: 31px;
-  background-color: #fff;
+  border-radius: 20px;
+  background-color: transparent;
   pointer-events: none;
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
@@ -156,7 +156,7 @@ textarea.input100 {
   -o-transform: translateX(-50%);
   transform: translateX(-50%);
   border-radius: 31px;
-  background-color: #bc0000;
+  background-color: #c8102e;
   pointer-events: none;
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
@@ -165,7 +165,7 @@ textarea.input100 {
 }
 
 .contact100-form-btn:hover:before {
-  background-color: #800000;
+  background-color: #8b0a1e;
   width: calc(100% + 20px);
 }
 
@@ -178,7 +178,7 @@ textarea.input100 {
 }
 
 .btn-check:active + .btn-primary:focus, .btn-check:checked + .btn-primary:focus, .btn-primary.active:focus, .btn-primary:active:focus, .show > .btn-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 .25rem rgba(255, 0, 0, 0.5);
+  box-shadow: 0 0 0 .25rem rgba(200, 16, 46, 0.45);
 }
 
 button:focus:not(:focus-visible) {
@@ -187,7 +187,6 @@ button:focus:not(:focus-visible) {
 
 .btn-primary, .btn, .btn:hover, .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn:active, .btn:focus {
   color: #fff;
-  background-color: #bc0000;
-  border-color: #bc0000;
+  background-color: #c8102e;
+  border-color: #c8102e;
 }
-

@@ -1,7 +1,7 @@
 .tc-headline-1 {
   position: relative;
   display: inline-block;
-  color: #bdbdbd;
+  color: #7a7272;
   width: 100%;
   text-align: center;
   font-size: 16px;
@@ -22,11 +22,12 @@
   text-align: center;
   margin: 0;
   line-height: 1em;
+  color: #f4f1f1;
 }
 
 .tc-headline-1 h5 {
-  background-color: #bdbdbd;
-  color: #212121;
+  background-color: #c8102e;
+  color: #fff;
   display: inline-block;
   font-size: 0.6em;
   font-weight: 700;
@@ -48,12 +49,12 @@
 
 .tc-headline-1 h5:before {
   right: 100%;
-  border-color: #bdbdbd #bdbdbd #bdbdbd transparent;
+  border-color: #c8102e #c8102e #c8102e transparent;
 }
 
 .tc-headline-1 h5:after {
   left: 100%;
-  border-color: #bdbdbd transparent #bdbdbd #bdbdbd;
+  border-color: #c8102e transparent #c8102e #c8102e;
 }
 
 .tc-headline-1 h6 {
@@ -61,6 +62,7 @@
   display: inline-block;
   position: relative;
   text-transform: uppercase;
+  color: #a89f9f;
 }
 
 .tc-headline-1 h6:before, .tc-headline-1 h6:after {
@@ -69,10 +71,11 @@
   content: '';
   width: 30px;
   top: 50%;
-  border-top: 2px solid #bdbdbd;
-  border-bottom: 2px solid #bdbdbd;
+  border-top: 2px solid #c8102e;
+  border-bottom: 2px solid #c8102e;
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
+  opacity: 0.5;
 }
 
 .tc-headline-1 h6:before {
@@ -86,5 +89,5 @@
 .tc-headline-1 i {
   font-size: 22px;
   line-height: 36px;
+  color: #c8102e;
 }
-
